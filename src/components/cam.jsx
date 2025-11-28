@@ -43,7 +43,9 @@ function CameraLiveAI() {
     async function startCamera() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: {
+            facingMode: "environment",
+          },
         });
         videoRef.current.srcObject = stream;
 
@@ -75,7 +77,7 @@ function CameraLiveAI() {
         ref={videoRef}
         autoPlay
         playsInline
-        className="max-w-2/3 border-2 border-white"
+        className="max-w-2/3 border-2 border-white -scale-x-100"
       />
       <p className="text-xl p-2 text-green-400">
         Predicción:{prediction && prediction > 0.5 ? " Perro" : " Gato"}.
